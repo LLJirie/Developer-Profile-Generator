@@ -8,6 +8,7 @@ const generateHTML = require("./myGenerateHTML");
 const convertFactory = require("electron-html-to");
 const open = require('open');
 
+
 inquirer
   .prompt(
     [{
@@ -66,42 +67,29 @@ inquirer
             }
             console.log(userData);
             return generateHTML(userData);
-          }).then(function (html) {
-            fs.writeFile("resume.html", html, function (err) {
-              if(err) {
-                return console.log(err);
+          }).then(function (generatedHTML) {
+            // fs.writeFile("resume.html", html, function (err) {
+            //   if(err) {
+            //     return console.log(err);
+            //   }
+            //   console.log("success!")
+            // })
+
+            var conversion = convertFactory({
+              converterPath: convertFactory.converters.PDF
+            });
+             
+            conversion({ html: generatedHTML}, function(err, result) {
+              if (err) {
+                return console.error(err);
               }
-              console.log("success!")
-            })
+             
+              // result.stream.pipe(fs.createWriteStream('/path/to/anywhere.pdf'));
+              result.stream.pipe(fs.createWriteStream(path.join("./profile.pdf")));
+
+              conversion.kill();
           });
 
       });
   });
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+});
