@@ -1,9 +1,12 @@
 const fs = require("fs");
 const util = require("util");
+const path = require("path");
 const inquirer = require("inquirer");
 const axios = require("axios");
 require("dotenv").config();
 const generateHTML = require("./myGenerateHTML");
+const convertFactory = require("electron-html-to");
+const open = require('open');
 
 inquirer
   .prompt(
@@ -40,10 +43,10 @@ inquirer
           .get(`https://api.github.com/users/${username}/repos?client_id=${
             process.env.CLIENT_ID
             }&client_secret=${process.env.CLIENT_SECRET}&per_page=100`)
-
+// .then takes in a function
           .then(function (starResults) {
             let starTotal = 0;
-            console.log(starResults.data);
+            // console.log(starResults.data);
             starResults.data.forEach(repo => {
               starTotal += repo.stargazers_count;
             });
@@ -61,6 +64,7 @@ inquirer
               stars: starTotal,
               color: color
             }
+            console.log(userData);
             return generateHTML(userData);
           }).then(function (html) {
             fs.writeFile("resume.html", html, function (err) {

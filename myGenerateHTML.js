@@ -24,8 +24,7 @@ const colors = {
     photoBorderColor: "white"
   }
 };
-
-function generateHTML (data) {
+function generateHTML(data) {
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -137,7 +136,6 @@ function generateHTML (data) {
          padding-left: 100px;
          padding-right: 100px;
          }
-​
          .row {
            display: flex;
            flex-wrap: wrap;
@@ -145,7 +143,6 @@ function generateHTML (data) {
            margin-top: 20px;
            margin-bottom: 20px;
          }
-​
          .card {
            padding: 20px;
            border-radius: 6px;
@@ -158,13 +155,11 @@ function generateHTML (data) {
          flex: 1;
          text-align: center;
          }
-​
          a, a:hover {
          text-decoration: none;
          color: inherit;
          font-weight: bold;
          }
-​
          @media print { 
           body { 
             zoom: .75; 
@@ -175,10 +170,10 @@ function generateHTML (data) {
    <body>
       <div class="wrapper">
          <div class="photo-header">
-            <img src=${data.profileImage}" alt="Photo of ${data.userName}" />
+            <img src=${data.profileImage} alt="Photo of ${data.userName}" />
             <h1>Hi!</h1>
             <h2>
-            My name is ${data.userName}!</h1>
+            My name is ${data.userName}</h1>
             <h5></h5>
             <nav class="links-nav">
                <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/${data.userLocation}"><i class="fas fa-location-arrow"></i> ${data.userLocation}</a>
@@ -190,7 +185,7 @@ function generateHTML (data) {
             <div class="container">
             <div class="row">
                <div class="col">
-                  <h3>${data.userBio} </h3>
+                  <h3>${data.userBio}</h3>
                </div>
                </div>
                <div class="row">
@@ -226,6 +221,5 @@ function generateHTML (data) {
       </div>
    </body>
 </html>`;
-        }
+}
 module.exports = generateHTML;
-      
